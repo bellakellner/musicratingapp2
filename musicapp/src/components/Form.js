@@ -5,15 +5,15 @@ class Form extends Component {
     super(props)
 
     this.state = {
-      username: '',
+      songname: '',
       comments: '',
-      topic:'react'
+      rating:'1'
     }
   }
 
-handleUsernameChange = (event) => {
+handleSongChange = (event) => {
    this.setState({
-     username: event.target.value
+     songname: event.target.value
    })
 }
 handleCommentsChange = (event) => {
@@ -21,9 +21,9 @@ handleCommentsChange = (event) => {
      comments: event.target.value
    })
 }
-handleTopicChange = event => {
+handleRatingChange = event => {
    this.setState({
-     topic: event.target.value
+     rating: event.target.value
    })
 }
 
@@ -35,19 +35,21 @@ handleSubmit = event => {
     return(
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label>Username</label>
-          <input type = 'text'value = {this.state.username} onChange ={this.handleUsernameChange} />
+          <label>Song</label>
+          <input type = 'text'value = {this.state.songname} onChange ={this.handleSongChange} />
         </div>
         <div>
           <label>Comments</label>
           <textarea value = {this.state.comments} onChange = {this.handleCommentsChange}/>
         </div>
         <div>
-          <label>Topic</label>
-          <select value ={this.state.topic} onChange ={this.handleTopicChange}>
-          <option value='react'> React </option>
-          <option value='angular'> Angular </option>
-          <option value='vue'> Vue </option>
+          <label>Rating</label>
+          <select value ={this.state.topic} onChange ={this.handleratingChange}>
+          <option value='one'> 1 </option>
+          <option value='two'> 2 </option>
+          <option value='three'> 3 </option>
+          <option value='four'> 4 </option>
+          <option value='five'> 5 </option>
           </select>
 
         </div>
