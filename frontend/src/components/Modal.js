@@ -31,7 +31,7 @@ export default class CustomModal extends React.Component {
     // Here we define one property called activeItem.
     // 'this' refers to the currently instantiated CustomModal.
     this.state = {
-      activeItem: this.props.activeItem,
+      songItem: this.props.songItem,
     };
   }
 
@@ -45,9 +45,9 @@ export default class CustomModal extends React.Component {
     // <input name="description" placeholder="Enter Todo description" type="text" class="form-control" value="My Task">.
     // To refer to the description we assign the variable name = "description" and value = "My Task".
     let { name, value } = event.target;
-    if (event.target.type === "checkbox") {
-      value = event.target.checked;
-    }
+    // if (event.target.type === "checkbox") {
+    //   value = event.target.checked;
+    // }
     // Below we have the spread operator three dots ... . It works as follows:
     // var parts = ['two', 'three']; // [two", "three"]
     // var numbers = ['one', ...parts, 'four']; // ["one", "two", "three", "four"]
@@ -55,12 +55,12 @@ export default class CustomModal extends React.Component {
     // {"id": 3, "title": "My Task", "description": "Wash Dishes", "completed": true}.
     // [name]: value sets the name of the task to the new value the user entered
     // (e.g., title to "Another Task" or description to "Sweep floor").
-    const activeItem = { ...this.state.activeItem, [name]: value };
+    const songItem = { ...this.state.songItem, [name]: value };
     // To change a value in the `state` object for rendering, use the `setState()`
     // method (on the current CustomModal instance referred to with `this`).
     // If you would not do so, the text shown to the user in the textbox, e.g.,
     // for the title of the new task would not change.
-    this.setState({ activeItem });
+    this.setState({ songItem });
   };
   // The `render()` method is the only required method in a class component.
   // When called, it will render the page. You do not have to specifically
@@ -78,7 +78,7 @@ export default class CustomModal extends React.Component {
       // Open the modal on toggling/clicking. See the toggle function in App.js
       // below.
       <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Todo Item </ModalHeader>
+        <ModalHeader toggle={toggle}> Song1 Item </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
@@ -86,42 +86,45 @@ export default class CustomModal extends React.Component {
               <Input
                 type="text"
                 name="title"
-                value={this.state.activeItem.title}
+                value={this.state.songItem.title}
                 // "this" refers to the current event. If there is a change,
                 // it will be passed to the handleChange function above.
                 onChange={this.handleChange}
-                placeholder="Enter Todo Title"
+                placeholder="Enter Song Title"
               />
             </FormGroup>
             <FormGroup>
-              <Label for="description">Description</Label>
+              <Label for="artist">Artist</Label>
               <Input
                 type="text"
-                name="description"
-                value={this.state.activeItem.description}
+                name="artist"
+                value={this.state.songItem.artist}
                 onChange={this.handleChange}
-                placeholder="Enter Todo description"
+                placeholder="Enter Artist"
               />
             </FormGroup>
-            <FormGroup check>
-              <Label for="completed">
-                <Input
-                  type="checkbox"
-                  name="completed"
-                  checked={this.state.activeItem.completed}
-                  onChange={this.handleChange}
-                />
-                Completed
-              </Label>
+            <FormGroup>
+              <Label for="rating">rating</Label>
+              <label>Rating</label>
+              <select value ={this.state.songItem.rating} onChange ={this.handleChange}>
+              <option value='one'> 1 </option>
+              <option value='two'> 2 </option>
+              <option value='three'> 3 </option>
+              <option value='four'> 4 </option>
+              <option value='five'> 5 </option>
+              </select>
+        
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="success" onClick={() => onSave(this.state.activeItem)}>
+          <Button color="success" onClick={() => onSave(this.state.songItem)}>
             Save
           </Button>
         </ModalFooter>
       </Modal>
     );
   }
+
+
 }
