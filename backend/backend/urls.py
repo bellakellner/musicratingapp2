@@ -20,9 +20,9 @@ from musicapp import views
 
 router = routers.DefaultRouter()
 router.register(r'users',views.UserView, 'musicapp')
-router.register(r'artist',views.ArtistView, 'musicapp')
+router.register(r'artist',views.ArtistView, 'artist')
 router.register(r'rating',views.RatingView, 'musicapp')
-router.register(r'rating',views.SongView, 'musicapp')
+router.register(r'songs',views.SongView, 'song')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
