@@ -19,9 +19,15 @@ class App extends React.Component {
         songItem: {
         title: "",
         artist: "",
+<<<<<<< HEAD
+        rating: 0,
+      },
+      artistList: [],
+=======
         rating: ''
         },
         songList: []
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
     };
   }
   // The `componentDidMount()` method is called after the component is rendered,
@@ -45,11 +51,26 @@ class App extends React.Component {
     // We are using async calls here. Please refer to the JavaScript
     // tutorial for how they work.
     axios
+<<<<<<< HEAD
 
       .get("http://localhost:8000/api/songs/")
+=======
+<<<<<<< HEAD
+      .get("http://localhost:8000/api/artist/")
+      // To change a value in the `state` object for rendering, use `setState()`.
+      // Here we get all todoList data. Each resolve (res) object has a data field.
+      .then((res) => this.setState({ artisList: res.data }))
+=======
+<<<<<<< HEAD
+      .get("http://localhost:8000/api/artist/")
+=======
+      .get("http://localhost:8000/api/musicapp/")
+>>>>>>> 83351e81af1982c20ffe9b9a24f0bb144cf7f528
+>>>>>>> 9a21da470d9de917a16437c12ab8d41d50cef187
       // To change a value in the `state` object for rendering, use `setState()`.
       // Here we get all todoList data. Each resolve (res) object has a data field.
       .then((res) => this.setState({ songList: res.data }))
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
       .catch((err) => console.log(err));
   };
   // Another custom function.
@@ -65,6 +86,32 @@ class App extends React.Component {
   };
   // Another custom function.
   // Function for switching between the Complete and Incomplete task views.
+<<<<<<< HEAD
+  renderTabList = () => {
+    return (
+      <div className="rated-list">
+        {/* Complete view active */}
+        <span
+          onClick={() => this.displayCompleted(true)}
+          // A ternary within curly braces in JSX.
+          // If the call to displayCompted returns viewCompleted as true,
+          // set the left, i.e., Complete view, to active ...
+          className={this.state.viewCompleted ? "active" : ""}
+        >
+          Complete
+        </span>
+        {/* Incomplete view active. */}
+        <span
+          //  ... otherwise, set the Incomplete view to active.
+          onClick={() => this.displayCompleted(false)}
+          className={this.state.viewCompleted ? "" : "active"}
+        >
+          Incomplete
+        </span>
+      </div>
+    );
+  };
+=======
   // renderTabList = () => {
   //   return (
   //     <div className="tab-list">
@@ -89,6 +136,7 @@ class App extends React.Component {
   //     </div>
   //   );
   // };
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
   // Another custom function.
   // Function for managing the edit and delete views.
   renderItems = () => {
@@ -96,8 +144,12 @@ class App extends React.Component {
     const { viewCompleted } = this.state;
     // filter is a callback function that returns the elements of an array
     // meeting a particular condition; here all items that are viewCompleted.
+<<<<<<< HEAD
+    const newItems = this.state.artistList.filter(
+=======
     // console.log(Object.values(songList));
     const newItems = this.state.songList.filter(
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
       (item) => item.completed === viewCompleted
     );
     // The items are then mapped to their UI elements based on their id, i.e.,
@@ -108,10 +160,17 @@ class App extends React.Component {
         className="list-group-item d-flex justify-content-between align-items-center"
       >
         <span
+<<<<<<< HEAD
+          className={`artist-title mr-2 ${
+            this.state.viewCompleted ? "completed-artist" : ""
+          }`}
+          title={item.title}
+=======
           className={`song-title mr-2 ${
             this.state.viewCompleted ? "Songs" : ""
           }`}
           title={item.artist}
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
         >
           {item.title}
         </span>
@@ -177,8 +236,13 @@ class App extends React.Component {
   // If the user triggers a createItem event (by clicking on Add task), create
   // a new item with default values and set the modal to false.
   createItem = () => {
+<<<<<<< HEAD
+    const item = { title: "", artist: "", rating: 0 };
+    this.setState({ activeItem: item, modal: !this.state.modal });
+=======
     const item = { title: "", artist: "", rating:"" };
     this.setState({ songItem: item, modal: !this.state.modal });
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
   };
   // Another custom function.
   // If the use triggers an editItem event.
@@ -192,14 +256,26 @@ class App extends React.Component {
   render() {
     return (
       <main className="content">
+<<<<<<< HEAD
         <h1 className="Stitle">Song Rating</h1>
+=======
+<<<<<<< HEAD
+        <h1 className="text-white text-uppercase text-center my-4">Music Rating App</h1>
+=======
+        <h1 className="text-white text-uppercase text-center my-4">Song Rating</h1>
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
+>>>>>>> 9a21da470d9de917a16437c12ab8d41d50cef187
         <div className="row ">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
               <div className="">
                  {/* If the user clicks the Add task button, call the createItem function. */}
                 <button onClick={this.createItem} className="btn btn-primary">
+<<<<<<< HEAD
+                  Add title
+=======
                   Add song
+>>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
                 </button>
               </div>
 
@@ -230,48 +306,3 @@ class App extends React.Component {
 
 // Export our App so that it can be rendered in index.js, where it is imported.
 export default App;
-
-
-
-
-
-// import logo from './logo.svg';
-//
-// // import React from 'react';
-// import React, { Component } from 'react'
-// import './App.css';
-// import Form from './components/Form'
-//
-// class App extends Component {
-//   render(){
-//       return (
-//         <div className = "App">
-//           <Form />
-//         </div>
-//       )
-//   }
-// }
-// export default App
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-//
-// export default App;
