@@ -1,4 +1,5 @@
 import React from "react";
+
 // We would like to use a modal (small window) to show details of a task.
 import {
   Button,
@@ -72,17 +73,18 @@ export default class CustomModal extends React.Component {
     // We have already defined activeItem above.
     // See App.js on how toggle, onSave, and activeItem are being used.
     const { toggle, onSave } = this.props;
+    
     return (
       // isOpen={true} is a Boolean describing if the modal should be shown or not,
       // i.e., in our case, what should happen if the modal is open.
       // Open the modal on toggling/clicking. See the toggle function in App.js
       // below.
-      <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Song1 Item </ModalHeader>
+      <Modal isOpen={true} toggle={toggle} >
+        <ModalHeader toggle={toggle}> Enter a Song </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="title">Title</Label>
+              <Label for="title">Title </Label>
               <Input
                 type="text"
                 name="title"
@@ -94,7 +96,7 @@ export default class CustomModal extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="artist">Artist</Label>
+              <Label for="artist">Artist </Label>
               <Input
                 type="text"
                 name="artist"
@@ -104,8 +106,7 @@ export default class CustomModal extends React.Component {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="rating">rating</Label>
-              <label>Rating</label>
+              <Label for="rating">Rating </Label>
               <select value ={this.state.songItem.rating} onChange ={this.handleChange}>
               <option value='one'> 1 </option>
               <option value='two'> 2 </option>
@@ -113,7 +114,6 @@ export default class CustomModal extends React.Component {
               <option value='four'> 4 </option>
               <option value='five'> 5 </option>
               </select>
-        
             </FormGroup>
           </Form>
         </ModalBody>

@@ -45,11 +45,8 @@ class App extends React.Component {
     // We are using async calls here. Please refer to the JavaScript
     // tutorial for how they work.
     axios
-<<<<<<< HEAD
-      .get("http://localhost:8000/api/artist/")
-=======
-      .get("http://localhost:8000/api/musicapp/")
->>>>>>> 83351e81af1982c20ffe9b9a24f0bb144cf7f528
+
+      .get("http://localhost:8000/api/songs/")
       // To change a value in the `state` object for rendering, use `setState()`.
       // Here we get all todoList data. Each resolve (res) object has a data field.
       .then((res) => this.setState({ songList: res.data }))
@@ -159,21 +156,21 @@ class App extends React.Component {
         // Backticks are useful because they allow us to use dynamic variables,
         // i.e., the item.id in this case. You can use this technique also
         // for authentication tokens.
-        .put(`http://localhost:8000/api/artist/${item.id}/`, item)
+        .put(`http://localhost:8000/api/songs/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
     // If the item does not yet exist, use a POST request to write to the
     // database.
     axios
-      .post("http://localhost:8000/api/artist/", item)
+      .post("http://localhost:8000/api/songs/", item)
       .then((res) => this.refreshList());
   };
   // Another custom function.
   // If the user triggers a delete event, send a delete request.
   handleDelete = (item) => {
     axios
-      .delete(`http://localhost:8000/api/artist/${item.id}`)
+      .delete(`http://localhost:8000/api/songs/${item.id}`)
       .then((res) => this.refreshList());
   };
   // Another custom function.
@@ -195,7 +192,7 @@ class App extends React.Component {
   render() {
     return (
       <main className="content">
-        <h1 className="text-white text-uppercase text-center my-4">Song Rating</h1>
+        <h1 className="Stitle">Song Rating</h1>
         <div className="row ">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
@@ -213,13 +210,16 @@ class App extends React.Component {
           </div>
         </div>
         {/* If the modal state is true, show the modal component. */}
+
         {this.state.modal ? (
           <Modal
+          
             songItem={this.state.songItem}
             toggle={this.toggle}
             onSave={this.handleSubmit}
           />
         ) : null}
+
       </main>
     );
   }

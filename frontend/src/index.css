@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
+  background-color: #ECE8DB;
 }
 button {
   margin: 5px;
@@ -16,23 +16,40 @@ button {
 .music-title {
   cursor: pointer;
 }
+FormGroup{
 
-.tab-list > span {
+  padding-bottom: 10px;
+}
+button:hover{
+  background-color: #E5D2C4;
+}
+#modal {
+  width:50px;
+  hight:50px;
+  background-color:red;
+}
+/* .tab-list > span {
     padding: 5px 8px;
     border: 1px solid #282c34;
     border-radius: 10px;
     margin: 5px;
     /* Spans do not have margins on top or bottom.
        However, this can be fixed with an inline-block
-       per https://stackoverflow.com/a/11700999. */
+    per https://stackoverflow.com/a/11700999.
     display: inline-block;
     cursor: pointer;
-  }
+  }*/
 
-.tab-list > span.active {
+/* .tab-list > span.active {
   background-color: #282c34;
   color: #ffffff;
+  } */
+  .Stitle{
+    text-align: center;
+    color: #A0816C;
+
   }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
