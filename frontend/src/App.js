@@ -45,7 +45,11 @@ class App extends React.Component {
     // We are using async calls here. Please refer to the JavaScript
     // tutorial for how they work.
     axios
+<<<<<<< HEAD
       .get("http://localhost:8000/api/artist/")
+=======
+      .get("http://localhost:8000/api/musicapp/")
+>>>>>>> 83351e81af1982c20ffe9b9a24f0bb144cf7f528
       // To change a value in the `state` object for rendering, use `setState()`.
       // Here we get all todoList data. Each resolve (res) object has a data field.
       .then((res) => this.setState({ songList: res.data }))
