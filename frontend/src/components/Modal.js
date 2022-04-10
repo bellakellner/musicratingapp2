@@ -78,11 +78,11 @@ export default class CustomModal extends React.Component {
       // Open the modal on toggling/clicking. See the toggle function in App.js
       // below.
       <Modal isOpen={true} toggle={toggle}>
-        <ModalHeader toggle={toggle}> Todo Item </ModalHeader>
+        <ModalHeader toggle={toggle}> Artist </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="title">Title</Label>
+              <Label for="title">Artist</Label>
               <Input
                 type="text"
                 name="title"
@@ -90,35 +90,35 @@ export default class CustomModal extends React.Component {
                 // "this" refers to the current event. If there is a change,
                 // it will be passed to the handleChange function above.
                 onChange={this.handleChange}
-                placeholder="Enter Todo Title"
+                placeholder="Enter Artist Name"
               />
             </FormGroup>
             <FormGroup>
-              <Label for="description">Description</Label>
+              <Label for="description">Title</Label>
               <Input
                 type="text"
                 name="description"
-                value={this.state.activeItem.description}
+                value={this.state.activeItem.title}
                 onChange={this.handleChange}
-                placeholder="Enter Todo description"
+                placeholder="Enter Title"
               />
             </FormGroup>
-            <FormGroup check>
-              <Label for="completed">
-                <Input
-                  type="checkbox"
-                  name="completed"
-                  checked={this.state.activeItem.completed}
-                  onChange={this.handleChange}
-                />
-                Completed
+            <FormGroup rating>
+                <label>Rating</label>
+                <select value ={this.state.topic} onChange ={this.handleratingChange}>
+                <option value='one'> 1 </option>
+                <option value='two'> 2 </option>
+                <option value='three'> 3 </option>
+                <option value='four'> 4 </option>
+                <option value='five'> 5 </option>
+                </select>
               </Label>
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
           <Button color="success" onClick={() => onSave(this.state.activeItem)}>
-            Save
+            Submit
           </Button>
         </ModalFooter>
       </Modal>
