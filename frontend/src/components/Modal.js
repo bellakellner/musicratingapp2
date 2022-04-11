@@ -73,31 +73,18 @@ export default class CustomModal extends React.Component {
     // We have already defined activeItem above.
     // See App.js on how toggle, onSave, and activeItem are being used.
     const { toggle, onSave } = this.props;
-    
+
     return (
       // isOpen={true} is a Boolean describing if the modal should be shown or not,
       // i.e., in our case, what should happen if the modal is open.
       // Open the modal on toggling/clicking. See the toggle function in App.js
       // below.
-<<<<<<< HEAD
       <Modal isOpen={true} toggle={toggle} >
         <ModalHeader toggle={toggle}> Enter a Song </ModalHeader>
         <ModalBody>
           <Form>
             <FormGroup>
               <Label for="title">Title </Label>
-=======
-      <Modal isOpen={true} toggle={toggle}>
-<<<<<<< HEAD
-        <ModalHeader toggle={toggle}> Artist </ModalHeader>
-=======
-        <ModalHeader toggle={toggle}> Song1 Item </ModalHeader>
->>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="title">Artist</Label>
->>>>>>> 9a21da470d9de917a16437c12ab8d41d50cef187
               <Input
                 type="text"
                 name="title"
@@ -105,31 +92,6 @@ export default class CustomModal extends React.Component {
                 // "this" refers to the current event. If there is a change,
                 // it will be passed to the handleChange function above.
                 onChange={this.handleChange}
-<<<<<<< HEAD
-                placeholder="Enter Artist Name"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="description">Title</Label>
-              <Input
-                type="text"
-                name="description"
-                value={this.state.activeItem.title}
-                onChange={this.handleChange}
-                placeholder="Enter Title"
-              />
-            </FormGroup>
-            <FormGroup rating>
-                <label>Rating</label>
-                <select value ={this.state.topic} onChange ={this.handleratingChange}>
-                <option value='one'> 1 </option>
-                <option value='two'> 2 </option>
-                <option value='three'> 3 </option>
-                <option value='four'> 4 </option>
-                <option value='five'> 5 </option>
-                </select>
-              </Label>
-=======
                 placeholder="Enter Song Title"
               />
             </FormGroup>
@@ -152,22 +114,12 @@ export default class CustomModal extends React.Component {
               <option value='four'> 4 </option>
               <option value='five'> 5 </option>
               </select>
-<<<<<<< HEAD
-=======
-        
->>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
->>>>>>> 9a21da470d9de917a16437c12ab8d41d50cef187
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-<<<<<<< HEAD
-          <Button color="success" onClick={() => onSave(this.state.activeItem)}>
-            Submit
-=======
           <Button color="success" onClick={() => onSave(this.state.songItem)}>
             Save
->>>>>>> 74bd5634df47b9d6b0886418bfae8418f7757a37
           </Button>
         </ModalFooter>
       </Modal>
