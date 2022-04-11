@@ -1,6 +1,7 @@
 import React from "react";
 // Import the CustomModal that we created in Modal.js.
 import Modal from "./components/Modal";
+import RatingModal from "./components/rating"
 import axios from "axios";
 
 // We are creating a class component for our todo list and individual todo list
@@ -15,11 +16,11 @@ class App extends React.Component {
     // activeItem (object)
     // todoList (array).
     this.state = {
-        viewCompleted:false,
         songItem: {
-        title: "",
+        song: "",
         artist: "",
         rating: 0,
+        username:'',
       },
         songList: []
     };
@@ -44,10 +45,12 @@ class App extends React.Component {
     // Otherwise, we catch the error and print it to the console (rejected data).
     // We are using async calls here. Please refer to the JavaScript
     // tutorial for how they work.
+
+
     axios
 
+      .get("http://localhost:8000/api/artist/")
 
-      .get("http://localhost:8000/api/songs/")
       // To change a value in the `state` object for rendering, use `setState()`.
       // Here we get all todoList data. Each resolve (res) object has a data field.
 
@@ -55,7 +58,9 @@ class App extends React.Component {
       // Here we get all todoList data. Each resolve (res) object has a data field.
       .then((res) => this.setState({ songList: res.data }))
       .catch((err) => console.log(err));
+      console.log(this.state.songList);
   };
+
   // Another custom function.
   // The status parameter will receive a Boolean argument --- true or false ---
   // when the displayCompleted function is being called.
@@ -70,83 +75,30 @@ class App extends React.Component {
   // Another custom function.
   // Function for switching between the Complete and Incomplete task views.
 
-  // renderTabList = () => {
-  //   return (
-  //     <div className="rated-list">
-  //       {/* Complete view active */}
-  //       <span
-  //         onClick={() => this.displayCompleted(true)}
-  //         // A ternary within curly braces in JSX.
-  //         // If the call to displayCompted returns viewCompleted as true,
-  //         // set the left, i.e., Complete view, to active ...
-  //         className={this.state.viewCompleted ? "active" : ""}
-  //       >
-  //         Complete
-  //       </span>
-  //       {/* Incomplete view active. */}
-  //       <span
-  //         //  ... otherwise, set the Incomplete view to active.
-  //         onClick={() => this.displayCompleted(false)}
-  //         className={this.state.viewCompleted ? "" : "active"}
-  //       >
-  //         Incomplete
-  //       </span>
-  //     </div>
-  //   );
-  // };
 
-  // renderTabList = () => {
-  //   return (
-  //     <div className="tab-list">
-  //       {/* Complete view active */}
-  //       <span
-  //         onClick={() => this.displayCompleted(true)}
-  //         // A ternary within curly braces in JSX.
-  //         // If the call to displayCompted returns viewCompleted as true,
-  //         // set the left, i.e., Complete view, to active ...
-  //         className={this.state.viewCompleted ? "active" : ""}
-  //       >
-  //         Complete
-  //       </span>
-  //       {/* Incomplete view active. */}
-  //       <span
-  //         //  ... otherwise, set the Incomplete view to active.
-  //         onClick={() => this.displayCompleted(false)}
-  //         className={this.state.viewCompleted ? "" : "active"}
-  //       >
-  //         Incomplete
-  //       </span>
-  //     </div>
-  //   );
 
   // Another custom function.
   // Function for managing the edit and delete views.
   renderItems = () => {
     // Destructuring assignment that assigns viewCompleted = this.state.viewCompleted
-    const { viewCompleted } = this.state;
-    // filter is a callback function that returns the elements of an array
-    // meeting a particular condition; here all items that are viewCompleted.
-
-    // console.log(Object.values(songList));
-    const newItems = this.state.songList.filter(
-      (item) => item.completed === viewCompleted
-    );
+    // const { viewCompleted } = this.state;
+    // // filter is a callback function that returns the elements of an array
+    // // meeting a particular condition; here all items that are viewCompleted.
+    //
+    // // console.log(Object.values(songList));
+    // const newItems = this.state.songList.filter(
+    //   (item) => item.completed === viewCompleted
+    // );
     // The items are then mapped to their UI elements based on their id, i.e.,
     // item.id, item.description, and item.title.
-    return newItems.map((item) => (
+    return this.state.songList.map((item) => (
       <li
         key={item.id}
         className="list-group-item d-flex justify-content-between align-items-center"
       >
-        <span
+      
+          {item.song}
 
-          className={`artist-title mr-2 ${
-            this.state.viewCompleted ? "completed-artist" : ""
-          }`}
-          title={item.artist}
-        >
-          {item.title}
-        </span>
         {/* UI for editing and deleting items and their respective events. */}
         <span>
           <button
@@ -164,6 +116,15 @@ class App extends React.Component {
           >
             Delete{" "}
           </button>
+
+          <button
+            // If the user clicks the Delete button, call the handleDelete function.
+            onClick={() => this.handleRate(item)}
+            className="btn btn-danger"
+          >
+            Rate{" "}
+          </button>
+
         </span>
       </li>
     ));
@@ -177,6 +138,11 @@ class App extends React.Component {
     // Upon toggle, set the modal to false, i.e., do not show the modal.
     this.setState({ modal: !this.state.modal });
   };
+  ratingtoggle = () => {
+    // We have a modal view below in the render() function.
+    // Upon toggle, set the modal to false, i.e., do not show the modal.
+    this.setState({ ratingModal: !this.state.ratingModal });
+  };
   // Another custom function.
   handleSubmit = (item) => {
     this.toggle();
@@ -188,34 +154,62 @@ class App extends React.Component {
         // Backticks are useful because they allow us to use dynamic variables,
         // i.e., the item.id in this case. You can use this technique also
         // for authentication tokens.
-        .put(`http://localhost:8000/api/songs/${item.id}/`, item)
+        .put(`http://localhost:8000/api/artist/${item.id}/`, item)
         .then((res) => this.refreshList());
       return;
     }
     // If the item does not yet exist, use a POST request to write to the
     // database.
     axios
-      .post("http://localhost:8000/api/songs/", item)
+      .post("http://localhost:8000/api/artist/", item)
+      .then((res) => this.refreshList());
+  };
+
+  handleRate = (item) => {
+    this.ratingtoggle();
+    // If the item already exists in our database, i.e., we have an id for our
+    // item, use a PUT request to modify it.
+    if (item.song) {
+      axios
+        // Note that we are using backticks here instead of double quotes.
+        // Backticks are useful because they allow us to use dynamic variables,
+        // i.e., the item.id in this case. You can use this technique also
+        // for authentication tokens.
+        .put(`http://localhost:8000/api/rating/${item.song}/`, item)
+        .then((res) => this.refreshList());
+      return;
+    }
+    // If the item does not yet exist, use a POST request to write to the
+    // database.
+    axios
+      .post("http://localhost:8000/api/rating/", item)
       .then((res) => this.refreshList());
   };
   // Another custom function.
   // If the user triggers a delete event, send a delete request.
   handleDelete = (item) => {
     axios
-      .delete(`http://localhost:8000/api/songs/${item.id}`)
+      .delete(`http://localhost:8000/api/artist/${item.id}`)
       .then((res) => this.refreshList());
   };
   // Another custom function.
   // If the user triggers a createItem event (by clicking on Add task), create
   // a new item with default values and set the modal to false.
   createItem = () => {
-    const item = { title: "", artist: "", rating:0 };
+    const item = { song: "", artist: ""};
     this.setState({ songItem: item, modal: !this.state.modal });
+  };
+  createRate = () => {
+    const item = { username: "", rating: ""};
+    this.setState({ songItem: item, ratingmodal: !this.state.ratingmodal });
   };
   // Another custom function.
   // If the use triggers an editItem event.
   editItem = (item) => {
     this.setState({ songItem: item, modal: !this.state.modal });
+  };
+  rateItem = item => {
+    this.setState({ songItem: item, ratingModal: !this.state.ratingModal });
   };
   // The `render()` method is the only required method in a class component.
   // When called, it will render the page. You do not have to specifically
@@ -228,9 +222,9 @@ class App extends React.Component {
         <div className="row ">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
-              <div className="">
+              <div className="y">
                  {/* If the user clicks the Add task button, call the createItem function. */}
-                <button onClick={this.createItem} className="btn btn-primary">
+                <button class = 'b' onClick={this.createItem} className="btn btn-primary">
                   Add song
 
                 </button>
@@ -252,7 +246,14 @@ class App extends React.Component {
             onSave={this.handleSubmit}
           />
         ) : null}
+        {this.state.ratingModal ? (
+          <RatingModal
 
+            songItem={this.state.songItem}
+            ratingtoggle={this.ratingtoggle}
+            onSave={this.handleRate}
+          />
+        ) : null}
       </main>
     );
   }

@@ -11,23 +11,24 @@ body {
 button {
   margin: 5px;
   padding: 5px;
+  background-color: #E5D2C4;
 }
 
 .music-title {
   cursor: pointer;
 }
-FormGroup{
+/* FormGroup{
 
   padding-bottom: 10px;
-}
+} */
 button:hover{
   background-color: #E5D2C4;
 }
-#modal {
+/* #modal {
   width:50px;
   hight:50px;
   background-color:red;
-}
+} */
 /* .tab-list > span {
     padding: 5px 8px;
     border: 1px solid #282c34;
@@ -49,6 +50,14 @@ button:hover{
     color: #A0816C;
 
   }
+.b{
+  margin: 5px;
+  padding: 5px;
+  background-color: #E5D2C4;
+}
+.b:hover{
+  background-color: #F7E2D1;
+}
 
 
 code {

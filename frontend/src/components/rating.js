@@ -16,7 +16,7 @@ import {
 // Let's create a component.
 // We are creating and exporting the CustomModal class. It is a class component.
 // It will be imported in our App.js.
-export default class CustomModal extends React.Component {
+export default class RatingModal extends React.Component {
   // The constructor function will be called when the component gets initialized.
   // It is also the place where you initialize the component's properties,
   // aka props (that is, function arguments in React-speak).
@@ -72,38 +72,38 @@ export default class CustomModal extends React.Component {
     // The modal has three properties: toggle, onSave, and activeItem.
     // We have already defined activeItem above.
     // See App.js on how toggle, onSave, and activeItem are being used.
-    const { toggle, onSave } = this.props;
+    const { ratingtoggle, onSave } = this.props;
 
     return (
       // isOpen={true} is a Boolean describing if the modal should be shown or not,
       // i.e., in our case, what should happen if the modal is open.
       // Open the modal on toggling/clicking. See the toggle function in App.js
       // below.
-      <Modal isOpen={true} toggle={toggle} >
-        <ModalHeader toggle={toggle}> Enter a Song </ModalHeader>
+      <Modal isOpen={true} toggle={ratingtoggle} >
+        <ModalHeader toggle={ratingtoggle}> Enter a Rating </ModalHeader>
         <ModalBody>
           <Form>
+          <FormGroup>
+          <Label for="username">Enter Username </Label>
+          <Input
+            type="text"
+            name="username"
+            value={this.state.songItem.username}
+            // "this" refers to the current event. If there is a change,
+            // it will be passed to the handleChange function above.
+            onChange={this.handleChange}
+            placeholder="Enter Username"
+          />
+          </FormGroup>
             <FormGroup>
-              <Label for="song">Title </Label>
-              <Input
-                type="text"
-                name="song"
-                value={this.state.songItem.title}
-                // "this" refers to the current event. If there is a change,
-                // it will be passed to the handleChange function above.
-                onChange={this.handleChange}
-                placeholder="Enter Song Title"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="artist">Artist </Label>
-              <Input
-                type="text"
-                name="artist"
-                value={this.state.songItem.artist}
-                onChange={this.handleChange}
-                placeholder="Enter Artist"
-              />
+              <Label for="rating">Rating </Label>
+              <select value ={this.state.songItem.rating} onChange ={this.handleChange}>
+              <option value='one'> 1 </option>
+              <option value='two'> 2 </option>
+              <option value='three'> 3 </option>
+              <option value='four'> 4 </option>
+              <option value='five'> 5 </option>
+              </select>
             </FormGroup>
           </Form>
         </ModalBody>

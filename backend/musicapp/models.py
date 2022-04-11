@@ -11,30 +11,31 @@ class User(models.Model):
 
 
 class Artist(models.Model):
-    song = models.CharField(primary_key=True, max_length=100)
-    artist = models.CharField(max_length=100)
+    id = models.AutoField(primary_key=True)
+    artist = models.CharField(max_length = 100)
+    song = models.CharField(max_length=100)
 
     def __str__(self):
         return self.artist + " -  " + self.song
 
 
 class Rating(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=100)
-    song = models.CharField(max_length=100)
+    # id = models.AutoField(primary_key=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    song = models.ForeignKey(Artist, on_delete=models.CASCADE)
     rating = models.IntegerField()
 
 
     def __str__(self):
         return self.song
 
-class Song(models.Model):
-    id = models.AutoField(primary_key=True)
-    artist = models.CharField(max_length = 100)
-    title = models.CharField(max_length=100)
-    genre = models.CharField(max_length=100)
+# class Song(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     artist = models.CharField(max_length = 100)
+#     song = models.CharField( max_length=100)
+    # rating = models.IntegerField()
     #year = models.IntegerField()
 
-
-    def __str__(self):
-        return self.title
+    #
+    # def __str__(self):
+    #     return self.song
